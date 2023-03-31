@@ -18,7 +18,7 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   let auth = FirebaseAuth;
 
-  if (auth.currentUser === null && to.path !== "/login") {
+  if (auth.currentUser === null && to.path !== "/") {
     next({
       path: "/",
     });
