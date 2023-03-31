@@ -105,7 +105,7 @@
 <script>
 import { FirebaseDb, FirebaseAuth } from "@/library/Database";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
-import { ref, set, get } from "firebase/database";
+import { ref, set, get, child } from "firebase/database";
 
 import { Form ,Field, ErrorMessage } from "vee-validate";
 
@@ -130,6 +130,7 @@ export default {
             if(this.email !== "" && this.password !== "") {
                 signInWithEmailAndPassword(FirebaseAuth, this.email, this.password)
                 .catch(error => this.loginError = error.message);
+
             } else {
                 return;
             }
@@ -177,7 +178,9 @@ export default {
             if(user) {
                 this.$store.commit("SET_LOGGEDIN", { uid: user.uid, email: user.email });
 
-                get(ref(FirebaseDb, "users/" + user.uid)).then((data) => {
+                const dbRef = ref(FirebaseDb);
+
+                get(child(dbRef, "users/" + user.uid)).then((data) => {
                     this.$store.commit("SET_USERNAME", data.val().name);
 
                     this.$router.push("/chat");
