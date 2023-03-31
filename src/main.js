@@ -18,7 +18,7 @@ let baseApp;
 
 onAuthStateChanged(FirebaseAuth, () => {
   if (!baseApp) {
-    const baseApp = createApp(App);
+    baseApp = createApp(App);
     baseApp.component("fa-icon", FontAwesomeIcon);
     baseApp.use(router);
     baseApp.use(store);
