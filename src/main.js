@@ -5,23 +5,14 @@ import store from "./store";
 
 import "bulma/css/bulma.css";
 
-import { FirebaseAuth } from "@/library/Database";
-import { onAuthStateChanged } from "firebase/auth";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faLocationArrow);
 
-let baseApp;
-
-onAuthStateChanged(FirebaseAuth, () => {
-  if (!baseApp) {
-    baseApp = createApp(App);
-    baseApp.component("fa-icon", FontAwesomeIcon);
-    baseApp.use(router);
-    baseApp.use(store);
-    baseApp.mount("#app");
-  }
-});
+let app = createApp(App);
+app.component("fa-icon", FontAwesomeIcon);
+app.use(router);
+app.use(store);
+app.mount("#app");
