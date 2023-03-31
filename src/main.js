@@ -10,9 +10,9 @@ import { onAuthStateChanged } from "firebase/auth";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faIcons } from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faIcons);
+library.add(faLocationArrow);
 
 let baseApp;
 
