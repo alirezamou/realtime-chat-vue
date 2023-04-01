@@ -55,7 +55,6 @@ export default {
                 timestamp: moment().unix(),
             };
             const newMessageKey = push(child(ref(FirebaseDb), "messages/" + this.activeRoom.slug)).key;
-            console.log(newMessageKey);
             const updates = {};
             updates["/messages/" + this.activeRoom.slug + "/" + newMessageKey] = newMessage;
             update(ref(FirebaseDb), updates);
