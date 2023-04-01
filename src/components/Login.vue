@@ -111,7 +111,7 @@
 <script>
 import { FirebaseDb, FirebaseAuth } from "@/library/Database";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
-import { ref, set, get, child } from "firebase/database";
+import { ref, get, child, update } from "firebase/database";
 
 import { Form ,Field, ErrorMessage } from "vee-validate";
 
@@ -140,9 +140,13 @@ export default {
         signup() {
             createUserWithEmailAndPassword(FirebaseAuth, this.email, this.password)
             .then((data) => {
-                set(ref(FirebaseDb, "users/" + data.user.uid), {
-                    name: this.username
-                });
+                const newUserId = data.user.uid;
+                const updates = {};
+                updates["/users/" + newUserId] = { name: this.username};
+
+                update(ref(FirebaseDb), updates)
+                .then(console.log("signup successful"))
+                .catch(() => this.loginError = "Unable to signup");
             })
             .catch(() => this.loginError = "Unable to signup");
         },
