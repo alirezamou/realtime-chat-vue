@@ -7,9 +7,9 @@ import "bulma/css/bulma.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faLocationArrow);
+library.add(faLocationArrow, faPlus);
 
 let app = createApp(App);
 app.component("fa-icon", FontAwesomeIcon);
