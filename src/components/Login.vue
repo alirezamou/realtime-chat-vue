@@ -5,28 +5,34 @@
                 <div class="column is-4 is-offset-4" v-if="page === 'login'">
                     <h1 class="title has-grey">Login</h1>
                     <div class="box">
-                        <form @submit.prevent="login">
+                        <Form @submit="login">
                             <div class="field">
                                 <div class="control">
-                                    <input
+                                    <Field
+                                      name="email"
                                       type="email"
                                       class="input"
                                       v-model="email"
                                       placeholder="Your@email.address"
                                       autofocus
+                                      :rules="validateEmail"
                                     />
                                 </div>
+                                <ErrorMessage name="email" class="help is-danger" />
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input
+                                    <Field
+                                      name="password"
                                       type="password"
                                       class="input"
                                       v-model="password"
                                       placeholder="Your password"
+                                      :rules="validatePassword"
                                     />
                                 </div>
+                                <ErrorMessage name="password" class="help is-danger" />
                             </div>
 
                             <p class="help is-danger" v-if="loginError">{{ loginError }}</p>
@@ -127,25 +133,17 @@ export default {
     },
     methods: {
         login() {
-            if(this.email !== "" && this.password !== "") {
-                signInWithEmailAndPassword(FirebaseAuth, this.email, this.password)
-                .catch(error => this.loginError = error.message);
+            signInWithEmailAndPassword(FirebaseAuth, this.email, this.password)
+            .catch(error => this.loginError = error.message);
 
-            } else {
-                return;
-            }
         },
         signup() {
-            if(this.email !== "" && this.password !== "") {
-                createUserWithEmailAndPassword(FirebaseAuth, this.email, this.password)
-                .then((data) => {
-                    set(ref(FirebaseDb, "users/" + data.user.uid), {
-                        name: this.username
-                    });
-                })
-            } else {
-                return;
-            }
+            createUserWithEmailAndPassword(FirebaseAuth, this.email, this.password)
+            .then((data) => {
+                set(ref(FirebaseDb, "users/" + data.user.uid), {
+                    name: this.username
+                });
+            })
         },
         validateEmail(value) {
             if (!value) {
