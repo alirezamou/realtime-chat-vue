@@ -93,7 +93,7 @@
                                 <ErrorMessage name="password" class="help is-danger" />
                             </div>
 
-                            <p class="helper is-danger">{{ loginError }}</p>
+                            <p class="help is-danger" v-if="loginError">{{ loginError }}</p>
 
                             <button class="button is-info is-fullwidth is-block">Signup</button>
                         </Form>
@@ -144,6 +144,7 @@ export default {
                     name: this.username
                 });
             })
+            .catch(() => this.loginError = "Unable to signup");
         },
         validateEmail(value) {
             if (!value) {
@@ -179,7 +180,11 @@ export default {
                 const dbRef = ref(FirebaseDb);
 
                 get(child(dbRef, "users/" + user.uid)).then((data) => {
-                    this.$store.commit("SET_USERNAME", data.val().name);
+                    if(data?.val()) {
+                        this.$store.commit("SET_USERNAME", data.val().name);
+                    } else {
+                        this.$store.commit("SET_USERNAME", "without username");
+                    }
 
                     this.$router.push("/chat");
                 });
