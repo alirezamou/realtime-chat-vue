@@ -7,6 +7,8 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD_NmalsA5nkj3xI86AIWv5ibEHFKF9dsk",
   authDomain: "realtime-chat-app-53d22.firebaseapp.com",
+  databaseURL:
+    "https://realtime-chat-app-53d22-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "realtime-chat-app-53d22",
   storageBucket: "realtime-chat-app-53d22.appspot.com",
   messagingSenderId: "765806176442",
