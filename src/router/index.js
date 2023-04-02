@@ -18,6 +18,10 @@ const router = createRouter({
       path: "/chat",
       component: ChatRoom,
     },
+    {
+      path: "/chat/:slug",
+      component: ChatRoom,
+    },
   ],
 });
 
