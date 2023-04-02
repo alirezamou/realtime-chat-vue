@@ -1,4 +1,22 @@
 <template>
+    <aside class="menu">
+        <p class="label-menu">Online now</p>
+
+        <ul class="menu-list">
+            <li v-for="user in users" :key="user.uid">
+                <p>
+                    {{ user.name }}
+                    <fa-icon icon="fa-solid fa-crown" v-if="isOwner(user.uid)" />
+                    
+                    <span class="is-pulled-right" v-if="isOwner(uid) && uid !== user.uid">
+                        <a class="is-pulled-left" @click="kickUser(user)">
+                            <fa-icon icon="fa-solid fa-times-circle" />
+                        </a>
+                    </span>
+                </p>
+            </li>
+        </ul>
+    </aside>
 </template>
 
 <script>
