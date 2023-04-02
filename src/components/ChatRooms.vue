@@ -17,18 +17,15 @@
             </a>
         </p>
 
-        <Form @submit="addRoom" v-if="addingRoom">
+        <form @submit.prevent="addRoom" v-if="addingRoom">
             <div class="field addons">
-                <Field
-                  name="room"
+                <input
                   type="text"
                   v-model="newRoomName"
                   placeholder="New Room"
                   class="input"
-                  :rules="(value) => value ? true : 'room name cannot be empty'"
                 />
             </div>
-            <ErrorMessage name="room" class="is-danger help" />
 
             <p class="control">
                 <button type="submit" class="button is-success">
@@ -43,15 +40,9 @@
 import { FirebaseDb } from "@/library/Database";
 import { update, ref, onChildAdded, onChildRemoved } from "firebase/database";
 import slugify from "slugify";
-import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
     name: "ChatRooms",
-    components: {
-        Form,
-        Field,
-        ErrorMessage,
-    },
     props: {
         selectedChatRoomSlug: {
             type: String,
