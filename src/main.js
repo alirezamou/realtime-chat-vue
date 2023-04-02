@@ -15,7 +15,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faLocationArrow, faPlus, faCrown, faTimesCircle);
+library.add(faLocationArrow, faPlus, faCrown, faTimesCircle, faSignOutAlt);
 
 let app = createApp(App);
 app.component("fa-icon", FontAwesomeIcon);
